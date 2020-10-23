@@ -36,5 +36,10 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void editMenuItem(MenuItem menuItem) {
+		
+	}
+
 
 }
