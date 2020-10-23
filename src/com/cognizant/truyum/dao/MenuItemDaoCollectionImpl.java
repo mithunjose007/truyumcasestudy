@@ -1,21 +1,34 @@
 package com.cognizant.truyum.dao;
 
 import java.util.*;
+import java.text.*;
 
 import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.util.DateUtil;
 
 public class MenuItemDaoCollectionImpl implements MenuItemDao {
 	private static  List<MenuItem> menuItemList;
-	public MenuItemDaoCollectionImpl() {
-		super();
-		List<MenuItem> newlst=new ArrayList<>();
-		if(menuItemList==null) {
-			newlst.add(new MenuItem(1,"Burger",70.0f,true,new DateUtil().convertToDate("25/03/2017"),"Main Course", true));
-			newlst.add(new MenuItem(2,"ChocolateShake",60.0f,true,new DateUtil().convertToDate("15/07/2017"),"Starter", true));
-			newlst.add(new MenuItem(3,"Biriyani",100.0f,true,new DateUtil().convertToDate("05/03/2017"),"Main Course", true));
+	public MenuItemDaoCollectionImpl() throws ParseException {
+		if (menuItemList == null) {
+			menuItemList = new ArrayList<MenuItem>();
+			menuItemList.add(new MenuItem(000001, "Sandwich", 99.00f, true,
+					DateUtil.convertToDate("15/03/2017"), "Main Course",
+					true));
+			menuItemList.add(new MenuItem(000002, "Burger", 129.00f, true,
+					DateUtil.convertToDate("23/12/2017"), "Main Course",
+					false));
+			menuItemList.add(new MenuItem(000003, "Pizza", 149.00f, true,
+					DateUtil.convertToDate("21/08/2018"), "Main Course",
+					false));
+			menuItemList.add(new MenuItem(000004, "French Fries", 200.00f,
+					true, DateUtil.convertToDate("02/07/2017"),
+					"Main Course", false));
+			menuItemList.add( new MenuItem(000005, "Choclate Brownie", 32.00f,
+					true, DateUtil.convertToDate("02/11/2022"), "Dessert",
+					true));
+
 		}
-		menuItemList=newlst;
+
 	}
 	public MenuItemDaoCollectionImpl(List<MenuItem> menuItemList)
 	{
