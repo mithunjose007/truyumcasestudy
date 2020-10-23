@@ -1,7 +1,7 @@
 package com.cognizant.truyum.dao;
 
 import java.util.*;
-
+import java.text.*;
 import com.cognizant.truyum.model.Cart;
 import com.cognizant.truyum.model.MenuItem;
 
@@ -20,7 +20,7 @@ public class CartDaoCollectionImpl implements CartDao {
 		CartDaoCollectionImpl.userCarts = userCarts;
 	}
 	@ Override
-	public void addCartItem(long userId, long menuItemId) {
+	public void addCartItem(long userId, long menuItemId) throws ParseException {
 		// TODO Auto-generated method stub
 		MenuItemDao menuItemDao = new MenuItemDaoCollectionImpl();
 		MenuItem item =menuItemDao.getMenuItem(menuItemId);
