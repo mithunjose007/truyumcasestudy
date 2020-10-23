@@ -1,7 +1,10 @@
 package com.cognizant.truyum.dao;
 
 public class CartEmptyException extends Exception {
-	CartEmptyException (String msg){
-		super(msg);
+
+
+	public CartEmptyException() {
+		// TODO Auto-generated constructor stub
+		super();
 	}
 }

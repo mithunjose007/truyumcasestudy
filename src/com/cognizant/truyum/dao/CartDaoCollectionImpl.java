@@ -59,7 +59,8 @@ public class CartDaoCollectionImpl implements CartDao {
 		List<MenuItem> allCartItems=cart.getMenuItemList();
 		if(allCartItems.isEmpty()) {
 			
-		throw new CartEmptyException();}
+		throw new CartEmptyException ();
+		}
 		else {
 			double total=0;
 			for(MenuItem item:allCartItems) {

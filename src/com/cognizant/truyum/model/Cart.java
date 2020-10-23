@@ -4,10 +4,15 @@ public class Cart {
 	private List<MenuItem> menuItemList;//List<MenuItem>
 	private double total;// double
 	
-	public Cart(List<MenuItem> menuItemList, double total) {
+	public Cart(List<MenuItem> menuItemList,double total) {
 		super();
 		this.menuItemList = menuItemList;
 		this.total = total;
+	}
+	public Cart(List<MenuItem> newUserMenuList) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.menuItemList = menuItemList;
 	}
 	public List<MenuItem> getMenuItemList() {
 		return menuItemList;
