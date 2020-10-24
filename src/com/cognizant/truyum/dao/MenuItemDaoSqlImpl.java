@@ -15,14 +15,15 @@ import com.cognizant.truyum.model.MenuItem;
  *
  */
 public class MenuItemDaoSqlImpl implements MenuItemDao {
-
+	PreparedStatement ps=null;
 	@Override
 	public List<MenuItem> getMenuItemListAdmin() {
+		
 		List<MenuItem> menuItemsList = new ArrayList<>();
 		try {
 			Connection con = ConnectionHandler.getConnection();
 			String query = "SELECT * FROM MENU_ITEMS";
-			PreparedStatement ps = con.prepareStatement(query);
+			 ps = con.prepareStatement(query);
 			ResultSet rs=ps.executeQuery();
 			while (rs.next()) {
 				long id = rs.getLong(1);
@@ -49,7 +50,7 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		try {
 		Connection con = ConnectionHandler.getConnection();
 		String query = "SELECT * FROM MENU_ITEMS WHERE ACTIVE = TRUE AND dateOfLaunch < now()";
-		PreparedStatement ps = con.prepareStatement(query);
+		 ps = con.prepareStatement(query);
 		ResultSet rs=ps.executeQuery();
 		while (rs.next()) {
 			long id = rs.getLong(1);
