@@ -23,8 +23,13 @@ public class MenuItemDaoSqlImplTest {
 	}
 	
 	public static void testModifyMenuItem() {
-		MenuItem menuItem = new MenuItem(5, "Chocolate", 30.0f, true,  new DateUtil().convertToDate("15/03/2017"), "Desert", true);
+		MenuItem menuItem = new MenuItem(1, "Sandwich", 109.00f, true, new DateUtil().convertToDate("02/07/2017"),
+				"MainCourse", true);
+		MenuItemDaoCollectionImpl menuItemDaoCollectionImpl = new MenuItemDaoCollectionImpl();
+		MenuItemDao menuItemDao = menuItemDaoCollectionImpl;
 		menuItemDao.modifyMenuItem(menuItem);
+		System.out.println("Modified MenuItem details are :"
+				+ menuItemDao.getMenuItem(000002));
 	}
 	
 	public static void testGetMenuItemListCustomer() {

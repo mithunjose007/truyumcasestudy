@@ -22,7 +22,7 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		List<MenuItem> menuItemsList = new ArrayList<>();
 		try {
 			Connection con = ConnectionHandler.getConnection();
-			String query = "SELECT * FROM MENU_ITEMS";
+			String query = "SELECT * FROM MENUITEMS";
 			 ps = con.prepareStatement(query);
 			ResultSet rs=ps.executeQuery();
 			while (rs.next()) {
@@ -49,7 +49,7 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		List<MenuItem> menuItemsList = new ArrayList<>();
 		try {
 		Connection con = ConnectionHandler.getConnection();
-		String query = "SELECT * FROM MENU_ITEMS WHERE ACTIVE = TRUE AND dateOfLaunch < now()";
+		String query = "SELECT * FROM MENUITEMS WHERE ACTIVE = TRUE AND dateOfLaunch < now()";
 		 ps = con.prepareStatement(query);
 		ResultSet rs=ps.executeQuery();
 		while (rs.next()) {
@@ -74,12 +74,12 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 	public void modifyMenuItem(MenuItem menuItem) {
 		try {
 				Connection con = ConnectionHandler.getConnection();
-				String query = "UPDATE MENU_ITEMS SET item_name = ?, PRICE = ?, ACTIVE = ?, DATEOFLAUNCH = ?, CATEGORY = ?, "
+				String query = "UPDATE MENUITEMS SET item_name = ?, PRICE = ?, ACTIVE = ?, DATEOFLAUNCH = ?, CATEGORY = ?, "
 						+ "FREEDELIVERY = ? WHERE ID = ?";
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				//java.sql.Date thisDate = java.sql.Date.valueOf(format.format(menuItem.getDateOfLaunch()));
 
-				PreparedStatement ps = con.prepareStatement(query);
+				 ps = con.prepareStatement(query);
 				ps.clearParameters();
 				
 				ps.setString(1, menuItem.getName());
@@ -110,8 +110,8 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		MenuItem menuItem = null;
 		try {
 			Connection con = ConnectionHandler.getConnection();
-			String query = "SELECT * FROM MENU_ITEMS WHERE ID =?";
-			PreparedStatement ps = con.prepareStatement(query);
+			String query = "SELECT * FROM MENUITEMS WHERE ID =?";
+			 ps = con.prepareStatement(query);
 			
 			ps.setLong(1, menuItemId);
 

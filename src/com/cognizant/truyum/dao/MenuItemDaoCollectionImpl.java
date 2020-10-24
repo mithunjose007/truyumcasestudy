@@ -7,11 +7,11 @@ import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.util.DateUtil;
 
 public class MenuItemDaoCollectionImpl implements MenuItemDao {
-	private static  List<MenuItem> menuItemList;
+	private static  List<MenuItem> menuItemList=new ArrayList<>();
 	public MenuItemDaoCollectionImpl()  {
 
 		if (menuItemList == null) {
-			try {
+			//try {
 				menuItemList.add(new MenuItem(1, "Sandwich", 99.0f, true, new DateUtil().convertToDate("15/03/2017"),
 						"Main Course", true));
 				menuItemList.add(new MenuItem(2, "Burger", 129.0f, true, new DateUtil().convertToDate("23/12/2017"),
@@ -23,11 +23,11 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 				menuItemList.add(new MenuItem(5, "Chocolate Brownie", 32.0f, true, new DateUtil().convertToDate("02/11/2022"),
 						"Dessert", true));
 				
-			} catch (ParseException e) {
+			//} catch (ParseException e) {
 
-				System.out.println("Parse exception " + e.getMessage());
-
-			}
+//				System.out.println("Parse exception " + e.getMessage());
+//
+//			}
 
 		}
 
