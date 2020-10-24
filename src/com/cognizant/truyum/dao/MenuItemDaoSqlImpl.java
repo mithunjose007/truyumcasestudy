@@ -15,14 +15,14 @@ import com.cognizant.truyum.model.MenuItem;
  *
  */
 public class MenuItemDaoSqlImpl implements MenuItemDao {
-	PreparedStatement ps=null;
+	private static PreparedStatement ps=null;
 	@Override
 	public List<MenuItem> getMenuItemListAdmin() {
 		
 		List<MenuItem> menuItemsList = new ArrayList<>();
 		try {
 			Connection con = ConnectionHandler.getConnection();
-			String query = "SELECT * FROM MENUITEMS";
+			String query = "SELECT * FROM MENUITEM";
 			 ps = con.prepareStatement(query);
 			ResultSet rs=ps.executeQuery();
 			while (rs.next()) {
@@ -49,7 +49,7 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		List<MenuItem> menuItemsList = new ArrayList<>();
 		try {
 		Connection con = ConnectionHandler.getConnection();
-		String query = "SELECT * FROM MENUITEMS WHERE ACTIVE = TRUE AND dateOfLaunch < now()";
+		String query = "SELECT * FROM MENUITEM WHERE ACTIVE = TRUE AND date_Of_Launch < now()";
 		 ps = con.prepareStatement(query);
 		ResultSet rs=ps.executeQuery();
 		while (rs.next()) {
@@ -74,8 +74,8 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 	public void modifyMenuItem(MenuItem menuItem) {
 		try {
 				Connection con = ConnectionHandler.getConnection();
-				String query = "UPDATE MENUITEMS SET item_name = ?, PRICE = ?, ACTIVE = ?, DATEOFLAUNCH = ?, CATEGORY = ?, "
-						+ "FREEDELIVERY = ? WHERE ID = ?";
+				String query = "UPDATE MENUITEM SET item_name = ?, PRICE = ?, ACTIVE = ?, DATE_OF_LAUNCH = ?, CATEGORY = ?, "
+						+ "FREE_DELIVERY = ? WHERE ID = ?";
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				//java.sql.Date thisDate = java.sql.Date.valueOf(format.format(menuItem.getDateOfLaunch()));
 
@@ -110,14 +110,14 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 		MenuItem menuItem = null;
 		try {
 			Connection con = ConnectionHandler.getConnection();
-			String query = "SELECT * FROM MENUITEMS WHERE ID =?";
+			String query = "SELECT * FROM MENUITEM WHERE ID =?";
 			 ps = con.prepareStatement(query);
 			
 			ps.setLong(1, menuItemId);
 
 			ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				long id = rs.getLong(1);
 				String name = rs.getString(2);
 				float price = rs.getFloat(3);
@@ -126,7 +126,7 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 				String category = rs.getString(6);
 				boolean freeDelivery = rs.getBoolean(7);
 				menuItem = new MenuItem(id, name, price, active, dateOfLaunch, category, freeDelivery);
-				break;
+			
 			}
 
 		} catch (ClassNotFoundException e) {
