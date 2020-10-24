@@ -20,9 +20,9 @@ public class MenuItemDaoCollectionImplTest  {
 	}
 	public static void testGetMenuItemListAdmin() throws ParseException {
 		MenuItemDaoCollectionImpl menuItemDaoCollectionImpl=new MenuItemDaoCollectionImpl();
-		List<MenuItem> menuItemList = menuItemDaoCollectionImpl.getMenuItemListAdmin();
+		List<MenuItem> menuItems = menuItemDaoCollectionImpl.getMenuItemListAdmin();
 
-		for (MenuItem item : menuItemList) {
+		for (MenuItem item : menuItems) {
 			System.out.println(item.toString());
 		}
 	}
@@ -49,5 +49,10 @@ public class MenuItemDaoCollectionImplTest  {
 
 	
 	}
+	void testGetMenuItem() {
+
+	}
 }
+
+
 

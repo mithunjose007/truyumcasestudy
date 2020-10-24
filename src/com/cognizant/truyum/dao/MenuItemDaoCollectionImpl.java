@@ -7,7 +7,7 @@ import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.util.DateUtil;
 
 public class MenuItemDaoCollectionImpl implements MenuItemDao {
-	private static  List<MenuItem> menuItemList=new ArrayList<>();
+	 static  List<MenuItem> menuItemList=new ArrayList<>();
 	public MenuItemDaoCollectionImpl()  {
 
 		if (menuItemList == null) {
@@ -69,20 +69,18 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 
 	@Override
 	public void modifyMenuItem(MenuItem menuItem) {
-		for (MenuItem eachItem : menuItemList) {
-			if (menuItem.equals(eachItem)) {
-				eachItem.setId(menuItem.getId());
-				eachItem.setName(menuItem.getName());
-				eachItem.setPrice(menuItem.getPrice());
-				eachItem.setActive(menuItem.isActive());
-				eachItem.setDateOfLaunch(menuItem.getDateOfLaunch());
-				eachItem.setCategory(menuItem.getCategory());
-				eachItem.setFreeDelivery(menuItem.isFreeDelivery());
+		for (MenuItem menuItemModify : menuItemList) {
+			if (menuItem.getId() == menuItemModify.getId()) {
 
-				
+				menuItemModify.setName(menuItem.getName());
+				menuItemModify.setCategory(menuItem.getCategory());
+				menuItemModify.setDateOfLaunch(menuItem.getDateOfLaunch());
+				menuItemModify.setFreeDelivery(menuItem.isFreeDelivery());
+				menuItemModify.setPrice(menuItem.getPrice());
+				menuItemModify.setActive(menuItem.isActive());
 			}
 		}
-		menuItemList.add(menuItem);
+		//menuItemList.add(menuItem);
 	}
 //...........................................
 	
