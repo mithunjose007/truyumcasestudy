@@ -8,24 +8,26 @@ import com.cognizant.truyum.util.DateUtil;
 
 public class MenuItemDaoCollectionImpl implements MenuItemDao {
 	private static  List<MenuItem> menuItemList;
-	public MenuItemDaoCollectionImpl() throws ParseException {
+	public MenuItemDaoCollectionImpl()  {
+
 		if (menuItemList == null) {
-			menuItemList = new ArrayList<MenuItem>();
-			menuItemList.add(new MenuItem(000001, "Sandwich", 99.00f, true,
-					DateUtil.convertToDate("15/03/2017"), "Main Course",
-					true));
-			menuItemList.add(new MenuItem(000002, "Burger", 129.00f, true,
-					DateUtil.convertToDate("23/12/2017"), "Main Course",
-					false));
-			menuItemList.add(new MenuItem(000003, "Pizza", 149.00f, true,
-					DateUtil.convertToDate("21/08/2018"), "Main Course",
-					false));
-			menuItemList.add(new MenuItem(000004, "French Fries", 200.00f,
-					true, DateUtil.convertToDate("02/07/2017"),
-					"Main Course", false));
-			menuItemList.add( new MenuItem(000005, "Choclate Brownie", 32.00f,
-					true, DateUtil.convertToDate("02/11/2022"), "Dessert",
-					true));
+			try {
+				menuItemList.add(new MenuItem(1, "Sandwich", 99.0f, true, new DateUtil().convertToDate("15/03/2017"),
+						"Main Course", true));
+				menuItemList.add(new MenuItem(2, "Burger", 129.0f, true, new DateUtil().convertToDate("23/12/2017"),
+						"Main Course", false));
+				menuItemList.add(new MenuItem(3, "Pizza", 149.0f, true, new DateUtil().convertToDate("21/08/2018"),
+						"Main Course", false));
+				menuItemList.add(new MenuItem(4, "French Fries", 57.0f, false, new DateUtil().convertToDate("02/07/2017"),
+						"Starters", true));
+				menuItemList.add(new MenuItem(5, "Chocolate Brownie", 32.0f, true, new DateUtil().convertToDate("02/11/2022"),
+						"Dessert", true));
+				
+			} catch (ParseException e) {
+
+				System.out.println("Parse exception " + e.getMessage());
+
+			}
 
 		}
 
@@ -33,9 +35,10 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 	public MenuItemDaoCollectionImpl(List<MenuItem> menuItemList)
 	{
 		MenuItemDaoCollectionImpl.menuItemList=menuItemList;
-	}//constructor
-	public List<MenuItem> getMenuItem() {
-		// TODO Auto-generated method stub
+	}//constructor2
+	
+	//getters and setter
+	public List<MenuItem> getMenuItemList() {
 		return menuItemList;
 	}
 	
@@ -43,16 +46,18 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 
 		MenuItemDaoCollectionImpl.menuItemList = menuItemList;
 	}
+	
+	
+	//overriding 4 methods
 	@Override
 	public List<MenuItem> getMenuItemListAdmin() {
-		// TODO Auto-generated method stub
 		return menuItemList;
-	}////
+	}////......................................
 	
 	@Override
 	public List<MenuItem> getMenuItemListCustomer() {
 		List<MenuItem> customerItemList = new ArrayList<>();
-		Date currDate = new DateUtil().convertToDate("20/10/2020");
+		Date currDate = new Date();
 		
 		for(MenuItem item : menuItemList) {
 			if(item.isActive() && currDate.after(item.getDateOfLaunch())){
@@ -60,7 +65,7 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 			}
 		}
 		return customerItemList;
-	}/////
+	}/////..................................
 
 	@Override
 	public void modifyMenuItem(MenuItem menuItem) {
@@ -73,13 +78,13 @@ public class MenuItemDaoCollectionImpl implements MenuItemDao {
 				eachItem.setDateOfLaunch(menuItem.getDateOfLaunch());
 				eachItem.setCategory(menuItem.getCategory());
 				eachItem.setFreeDelivery(menuItem.isFreeDelivery());
-//				eachItem = menuItem;
-				return;
+
+				
 			}
 		}
 		menuItemList.add(menuItem);
 	}
-
+//...........................................
 	
 
 	@Override

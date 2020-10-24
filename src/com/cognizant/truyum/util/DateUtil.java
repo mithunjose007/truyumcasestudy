@@ -4,7 +4,7 @@ import java.util.Date;
 import java.text.*;
 
 public class DateUtil {
-	public static  Date convertToDate (String date) {
+	public   Date convertToDate (String date) {
 		Date parseDate = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy");
 		try {

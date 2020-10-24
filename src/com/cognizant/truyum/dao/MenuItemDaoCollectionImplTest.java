@@ -1,10 +1,12 @@
 package com.cognizant.truyum.dao;
 import java.util.*;
-import com.cognizant.truyum.model.*;
-import com.cognizant.truyum.util.*;
-public class MenuItemDaoCollectionImplTest {
-	static MenuItemDao menuItemDao=new MenuItemDaoCollectionImpl();
-	public void main( String args[]) {
+import java.text.*;
+
+import com.cognizant.truyum.model.MenuItem;
+import com.cognizant.truyum.util.DateUtil;
+public class MenuItemDaoCollectionImplTest  {
+	//static MenuItemDao menuItemDao = new MenuItemDaoCollectionImpl();
+	public static void  main( String args[]) throws ParseException {
 		 
 				System.out.println("Menu List Admin Printing...");
 				testGetMenuItemListAdmin();
@@ -16,26 +18,34 @@ public class MenuItemDaoCollectionImplTest {
 
 			
 	}
-	public void testGetMenuItemListAdmin() {
-		List<MenuItem> menuItemList = menuItemDao.getMenuItemListAdmin();
+	public static void testGetMenuItemListAdmin() throws ParseException {
+		MenuItemDaoCollectionImpl menuItemDaoCollectionImpl=new MenuItemDaoCollectionImpl();
+		List<MenuItem> menuItemList = menuItemDaoCollectionImpl.getMenuItemListAdmin();
 
 		for (MenuItem item : menuItemList) {
-			System.out.println(item);
+			System.out.println(item.toString());
 		}
 	}
-	public void testGetMenuListCustomer() {
-		List<MenuItem> menuItemList = menuItemDao.getMenuItemListCustomer();
+	public  static void testGetMenuListCustomer() throws ParseException {
+		MenuItemDaoCollectionImpl menuItemDaoCollectionImpl = new MenuItemDaoCollectionImpl();
+		List<MenuItem> menuItems = menuItemDaoCollectionImpl
+				.getMenuItemListCustomer();
 
-		for (MenuItem item : menuItemList) {
-			System.out.println(item);
+		for (MenuItem menuItem : menuItems) {
+
+			System.out.println(menuItem.toString());
+
 		}
+
 	}
-	public void testModifyMenuItem(){
+	public static void testModifyMenuItem() throws ParseException{
 		MenuItem newMenuItem = new MenuItem(1, "Sandwich", 109.00f, true, new DateUtil().convertToDate("02/07/2017"),
 				"MainCourse", true);
+		MenuItemDaoCollectionImpl menuItemDaoCollectionImpl = new MenuItemDaoCollectionImpl();
+		MenuItemDao menuItemDao = menuItemDaoCollectionImpl;
 		menuItemDao.modifyMenuItem(newMenuItem);
-		MenuItem modifiedMenuItem = menuItemDao.getMenuItem(1);
-		System.out.println(modifiedMenuItem);
+		System.out.println("Modified MenuItem details are :"
+				+ menuItemDao.getMenuItem(000002));
 
 	
 	}

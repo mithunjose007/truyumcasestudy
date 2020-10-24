@@ -5,9 +5,9 @@ public class CartDaoCollectionImplTest {
 	public static CartDao cartDao = new CartDaoCollectionImpl();
 	public void main(String args[]){
 		testAddCartItem();
-		System.out.println();
+		
 		testGetAllCartItems();
-		System.out.println();
+		
 		testRemoveCartItem();
 	}
 	

@@ -12,15 +12,16 @@ public class CartDaoCollectionImpl implements CartDao {
 		if(userCarts==null) {
 			userCarts=new HashMap<Long,Cart>();
 		}
-	}
+	}// getters and setters
 	public Map<Long,Cart> getUserCarts(){
 		return userCarts;
 	}
 	public void setUserCarts(Map<Long, Cart> userCarts) {
 		CartDaoCollectionImpl.userCarts = userCarts;
 	}
+	
 	@ Override
-	public void addCartItem(long userId, long menuItemId) throws ParseException {
+	public void addCartItem(long userId, long menuItemId)  {
 		// TODO Auto-generated method stub
 		MenuItemDao menuItemDao = new MenuItemDaoCollectionImpl();
 		MenuItem item =menuItemDao.getMenuItem(menuItemId);
@@ -37,21 +38,15 @@ public class CartDaoCollectionImpl implements CartDao {
 	}
 
 	
-	public void removeCartItem(long userId, long menuItemId) {
-		// TODO Auto-generated method stub
-         Cart cart =userCarts.get(userId);
-         List<MenuItem> allCartItems=cart.getMenuItemList();
-         MenuItem itemToRemove=null;
-         for(MenuItem item:allCartItems) {
-        	 if(item.getId()==menuItemId) {
-        		 itemToRemove=item;
-        		 break;
-        	 }
-         }
-         allCartItems.remove(itemToRemove);
-         cart.setMenuItemList(allCartItems);
-	}
-
+	@Override
+	public void removeCartItem(long userId, long menuitemid) {
+		Cart cart = userCarts.get(userId);
+		ListIterator<MenuItem> iterator = cart.getMenuItemList().listIterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getId() == menuitemid) {
+				iterator.remove();}
+			}
+		}
 
 	public List<MenuItem> getAllCartItems(long userId) throws CartEmptyException {
 		// TODO Auto-generated method stub
@@ -68,7 +63,7 @@ public class CartDaoCollectionImpl implements CartDao {
 			}
 			cart.setTotal(total);
 		}
-		return null;
+		return allCartItems;
 	}
 
 }

@@ -3,7 +3,10 @@
  */
 package com.cognizant.truyum.dao;
 
-import java.util.List;
+import java.util.*;
+import java.sql.*;
+import java.util.Date;
+import java.text.*;
 
 import com.cognizant.truyum.model.MenuItem;
 
@@ -15,31 +18,128 @@ public class MenuItemDaoSqlImpl implements MenuItemDao {
 
 	@Override
 	public List<MenuItem> getMenuItemListAdmin() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MenuItem> menuItemsList = new ArrayList<>();
+		try {
+			Connection con = ConnectionHandler.getConnection();
+			String query = "SELECT * FROM MENU_ITEMS";
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs=ps.executeQuery();
+			while (rs.next()) {
+				long id = rs.getLong(1);
+				String name = rs.getString(2);
+				float price = rs.getFloat(3);
+				boolean active = rs.getBoolean(4);
+				Date dateOfLaunch = rs.getDate(5);
+				String category = rs.getString(6);
+				boolean freeDelivery = rs.getBoolean(7);
+				MenuItem item = new MenuItem(id, name, price, active, dateOfLaunch, category, freeDelivery);
+				menuItemsList.add(item);
+			}}catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return menuItemsList;
 	}
 
 	@Override
 	public List<MenuItem> getMenuItemListCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<MenuItem> menuItemsList = new ArrayList<>();
+		try {
+		Connection con = ConnectionHandler.getConnection();
+		String query = "SELECT * FROM MENU_ITEMS WHERE ACTIVE = TRUE AND dateOfLaunch < now()";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet rs=ps.executeQuery();
+		while (rs.next()) {
+			long id = rs.getLong(1);
+			String name = rs.getString(2);
+			float price = rs.getFloat(3);
+			boolean active = rs.getBoolean(4);
+			Date dateOfLaunch = rs.getDate(5);
+			String category = rs.getString(6);
+			boolean freeDelivery = rs.getBoolean(7);
+			MenuItem item = new MenuItem(id, name, price, active, dateOfLaunch, category, freeDelivery);
+			menuItemsList.add(item);
+		}}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	return menuItemsList;
 	}
 
 	@Override
 	public void modifyMenuItem(MenuItem menuItem) {
-		// TODO Auto-generated method stub
+		try {
+				Connection con = ConnectionHandler.getConnection();
+				String query = "UPDATE MENU_ITEMS SET item_name = ?, PRICE = ?, ACTIVE = ?, DATEOFLAUNCH = ?, CATEGORY = ?, "
+						+ "FREEDELIVERY = ? WHERE ID = ?";
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				//java.sql.Date thisDate = java.sql.Date.valueOf(format.format(menuItem.getDateOfLaunch()));
+
+				PreparedStatement ps = con.prepareStatement(query);
+				ps.clearParameters();
+				
+				ps.setString(1, menuItem.getName());
+				ps.setFloat(2, menuItem.getPrice());
+				ps.setBoolean(3, menuItem.isActive());
+				ps.setString(4, format.format(menuItem.getDateOfLaunch()));
+				ps.setString(5, menuItem.getCategory());
+				ps.setBoolean(6, menuItem.isFreeDelivery());
+				ps.setLong(7, menuItem.getId());
+				if(ps.executeUpdate() > 0) {
+					System.out.println("Query Successful");
+				}else {
+					System.out.println("Query Unsuccessful");
+				}
+				//ResultSet rs=ps.executeQuery();
+				}catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	
 
 	}
 
 	@Override
 	public MenuItem getMenuItem(long menuItemId) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public void editMenuItem(MenuItem menuItem) {
-		
-	}
+		MenuItem menuItem = null;
+		try {
+			Connection con = ConnectionHandler.getConnection();
+			String query = "SELECT * FROM MENU_ITEMS WHERE ID =?";
+			PreparedStatement ps = con.prepareStatement(query);
+			
+			ps.setLong(1, menuItemId);
 
+			ResultSet rs = ps.executeQuery();
 
+			while (rs.next()) {
+				long id = rs.getLong(1);
+				String name = rs.getString(2);
+				float price = rs.getFloat(3);
+				boolean active = rs.getBoolean(4);
+				Date dateOfLaunch = rs.getDate(5);
+				String category = rs.getString(6);
+				boolean freeDelivery = rs.getBoolean(7);
+				menuItem = new MenuItem(id, name, price, active, dateOfLaunch, category, freeDelivery);
+				break;
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return menuItem;
+	}
 }
+//	public void editMenuItem(MenuItem menuItem) {
+//		
+//	}
+
+
+
