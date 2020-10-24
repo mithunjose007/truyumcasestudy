@@ -4,7 +4,7 @@ import com.cognizant.truyum.model.MenuItem;
 import com.cognizant.truyum.util.DateUtil;
 public class MenuItemDaoSqlImplTest {
 	private static MenuItemDaoSqlImpl menuItemDao = new MenuItemDaoSqlImpl();
-	public  void main(String args[]){
+	public static void main(String args[]){
 		System.out.println("MenuItemDaoImplTest Main method begins");
 		System.out.println("Admin List of MenuItems");
 		testGetMenuItemListAdmin();

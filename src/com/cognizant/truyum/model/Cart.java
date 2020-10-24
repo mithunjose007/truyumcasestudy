@@ -1,18 +1,20 @@
 package com.cognizant.truyum.model;
-import java.util.*;
+
+import java.util.List;
+
 public class Cart {
-	private List<MenuItem> menuItemList;//List<MenuItem>
-	private double total;// double
+	private List<MenuItem> menuItemList;
+	private double total;
 	
-	public Cart(List<MenuItem> menuItemList,double total) {
+	
+	public Cart(List<MenuItem> menuItemList) {
+		super();
+		this.menuItemList = menuItemList;
+	}
+	public Cart(List<MenuItem> menuItemList, double total) {
 		super();
 		this.menuItemList = menuItemList;
 		this.total = total;
-	}
-	public Cart(List<MenuItem> newUserMenuList) {
-		// TODO Auto-generated constructor stub
-		super();
-		this.menuItemList = menuItemList;
 	}
 	public List<MenuItem> getMenuItemList() {
 		return menuItemList;
@@ -26,10 +28,13 @@ public class Cart {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
 	@Override
 	public String toString() {
 		return "Cart [menuItemList=" + menuItemList + ", total=" + total + "]";
 	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,6 +45,7 @@ public class Cart {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -60,6 +66,4 @@ public class Cart {
 	}
 
 
-
-	
 }
